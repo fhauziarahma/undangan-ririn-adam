@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Undangan Digital - Nama Acara</title>
+  <style>
+    :root{--bg:#f7f6ff;--card:#ffffff;--accent:#6c5ce7;--muted:#6b6b83}
+    *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#111}
+    .wrap{max-width:900px;margin:36px auto;padding:24px}
+    .card{background:var(--card);border-radius:16px;box-shadow:0 8px 30px rgba(20,20,50,0.06);overflow:hidden}
+
+    .hero{display:flex;gap:20px;padding:28px;align-items:center}
+    .hero .cover{width:180px;height:180px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#00b894);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
+    .hero .meta{flex:1}
+    .meta h1{margin:0;font-size:22px}
+    .meta p{margin:6px 0;color:var(--muted)}
+    .details{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
+    .pill{background:#f3f0ff;padding:8px 12px;border-radius:999px;font-size:13px;color:var(--accent);border:1px solid rgba(108,92,231,0.08)}
+
+    .body{display:grid;grid-template-columns:1fr 360px;gap:20px;padding:0 28px 28px}
+    .section{padding:18px;border-top:1px solid #f0eef9}
+    .event{line-height:1.6}
+    .event h2{margin:0 0 8px}
+
+    form{display:flex;flex-direction:column;gap:10px}
+    label{font-size:13px;color:var(--muted)}
+    input[type=text], input[type=email], textarea, select{padding:10px;border-radius:8px;border:1px solid #e9e7ff;background:#fff}
+    textarea{min-height:88px;resize:vertical}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(108,92,231,0.14)}
+
+    .right{padding:18px}
+    .guest-list{max-height:200px;overflow:auto;padding:8px;border-radius:8px;background:#fbfbff;border:1px dashed #eeecff}
+    .guest-item{padding:8px;border-bottom:1px solid #f0eef9}
+
+    .footer{padding:14px 18px;background:#faf9ff;border-top:1px solid #f0eef9;display:flex;gap:10px;align-items:center}
+
+    @media (max-width:880px){
+      .body{grid-template-columns:1fr}
+      .hero{flex-direction:column;align-items:flex-start}
+      .hero .cover{width:100%;height:140px}
+    }
+
+    /* Musik Player */
+    .music-player{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:10px 16px;border-radius:50px;display:flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.2);z-index:1000;}
+    .music-player span{font-size:14px;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hero">
+        <div class="cover" id="coverText">Akad & Resepsi</div>
+        <div class="meta">
+          <h1 id="eventTitle">Undangan Pernikahan: Fara & Raka</h1>
+          <p id="eventSubtitle">Dengan hormat kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
+          <div class="details">
+            <div class="pill" id="datePill">Sab, 10 Okt 2025 • 10:00 WIB</div>
+            <div class="pill" id="placePill">Gedung Serbaguna Harmoni, Bogor</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="body">
+        <div>
+          <div class="section event">
+            <h2>Rincian Acara</h2>
+            <p><strong>Akad:</strong> 10.00 WIB — Masuk akad</p>
+            <p><strong>Resepsi:</strong> 12.00 - 15.00 WIB — Makan bersama</p>
+            <p><strong>Alamat:</strong> Jl. Mawar No.10, Bogor. Parkir tersedia di halaman gedung.</p>
+            <p>Silakan konfirmasi kehadiran lewat formulir RSVP di samping. Terima kasih atas doa dan kehadirannya.</p>
+
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn" id="addCalendarBtn">Tambah ke kalender (.ics)</button>
+              <button class="btn ghost" id="printBtn">Cetak undangan</button>
+              <button class="btn ghost" id="shareBtn">Bagikan link</button>
+            </div>
+          </div>
+
+          <div class="section" style="display:block">
+            <h2>Pesan untuk Tamu</h2>
+            <p>Silakan tinggalkan pesan atau doa untuk pengantin. Kami akan sangat menghargainya.</p>
+            <div style="margin-top:8px">
+              <input type="text" id="guestNameTop" placeholder="Nama Anda" />
+              <textarea id="guestMessageTop" placeholder="Tulis pesan singkat..." style="margin-top:8px"></textarea>
+              <div style="margin-top:8px;display:flex;gap:8px"><button class="btn" id="sendMessageTop">Kirim Pesan</button></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="right">
+          <div class="section right">
+            <h3>RSVP</h3>
+            <form id="rsvpForm">
+              <label for="name">Nama*</label>
+              <input id="name" type="text" required placeholder="Nama lengkap" />
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="contoh@domain.com" />
+              <label for="attend">Kehadiran</label>
+              <select id="attend">
+                <option value="hadir">Hadir</option>
+                <option value="tidak">Tidak Bisa</option>
+                <option value="maybe">Mungkin</option>
+              </select>
+              <label for="guests">Jumlah Tamu</label>
+              <input id="guests" type="text" placeholder="Angka, mis: 2" />
+              <label for="note">Catatan / Pesan</label>
+              <textarea id="note" placeholder="Pesan untuk tuan rumah"></textarea>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button class="btn" type="submit">Kirim RSVP</button>
+                <button type="button" class="btn ghost" id="clearBtn">Reset</button>
+              </div>
+            </form>
+
+            <h4 style="margin-top:12px">Daftar Tamu (lokal)</h4>
+            <div class="guest-list" id="guestList">Belum ada RSVP.</div>
+          </div>
+
+          <div class="section">
+            <h4>Lokasi</h4>
+            <p>Gunakan peta di ponsel untuk arah lebih mudah.</p>
+            <a id="mapLink" href="#" target="_blank" class="btn ghost">Buka Peta</a>
+          </div>
+        </aside>
+      </div>
+
+      <div class="footer">
+        <div style="flex:1">© Undangan Digital • Buatanmu</div>
+        <div style="display:flex;gap:8px">
+          <button id="downloadBtn" class="btn ghost">Download JPG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Musik Player -->
+  <div class="music-player" id="musicBtn">
+    <span>🎵 Putar Musik</span>
+  </div>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="<iframe width="853" height="480" src="https://www.youtube.com/embed/PeJ-vJNw5JA" title="[SABILULUNGAN] SUNDANESE INSTRUMENTALIA | DEGUNG SUNDA | INDONESIAN TRADITIONAL MUSIC" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    let playing = false;
+
+    musicBtn.addEventListener('click', ()=>{
+      if(!playing){
+        bgMusic.play();
+        playing = true;
+        musicBtn.innerHTML = '⏸️ Hentikan Musik';
+      } else {
+        bgMusic.pause();
+        playing = false;
+        musicBtn.innerHTML = '🎵 Putar Musik';
+      }
+    });
+  </script>
+</body>
+</html>
