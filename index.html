@@ -1,148 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Undangan Pernikahan Adam & Ririn rahmawati</title>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Undangan Ririn Rahmawati & Adam</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fff5f5, #ffe6f0);
-      color: #333;
-      text-align: center;
       margin: 0;
-      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #f9f9f9, #ffffff);
+      color: #111;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    header {
-      background-color: #ffb6c1;
-      color: white;
-      padding: 40px 20px;
-      border-radius: 0 0 50% 50%;
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: url('https://i.ibb.co/sg2qBL5/sunda-pattern-bg.jpg') center/cover no-repeat;
+      color: #000;
     }
 
     h1 {
-      font-size: 2.5em;
+      font-size: 36px;
       margin-bottom: 10px;
+      letter-spacing: 1px;
     }
 
-    h2 {
-      font-weight: 400;
-      margin-top: 0;
+    p {
+      font-size: 16px;
+      color: #333;
     }
 
-    section {
-      margin: 30px auto;
-      width: 90%;
-      max-width: 600px;
-      background: white;
-      padding: 25px;
+    .date, .place {
+      background: #000;
+      color: #fff;
+      display: inline-block;
+      padding: 8px 14px;
       border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin: 5px;
+      font-size: 14px;
     }
 
-    label {
-      display: block;
-      text-align: left;
-      margin-top: 15px;
-      font-weight: 600;
+    .section {
+      text-align: center;
+      padding: 40px 20px;
     }
 
-    input, textarea, select {
-      width: 100%;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+
+    input, select, textarea {
       padding: 10px;
-      margin-top: 8px;
       border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 1em;
-      font-family: 'Poppins', sans-serif;
+      border-radius: 6px;
     }
 
     button {
-      margin-top: 20px;
-      padding: 12px 20px;
-      background-color: #ff7f9c;
+      background: #000;
+      color: #fff;
       border: none;
-      color: white;
-      border-radius: 10px;
+      padding: 10px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 1em;
-      transition: 0.3s;
     }
 
-    button:hover {
-      background-color: #ff4f78;
-    }
-
-    .lokasi {
-      margin-top: 10px;
-      font-style: italic;
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 15px;
-      font-size: 0.9em;
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
       color: #666;
+      border-top: 1px solid #ddd;
+    }
+
+    /* Efek bunga jatuh */
+    .petal {
+      position: fixed;
+      top: -10px;
+      width: 12px;
+      height: 12px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      animation: fall 8s linear infinite;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Undangan Pernikahan</h1>
-    <h2>Ririn & Adam</h2>
-    <p>Minggu, 26 Oktober 2025</p>
-  </header>
+  <div class="hero">
+    <h1>Ririn Rahmawati & Adam</h1>
+    <p>Dengan hormat kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
+    <div class="date">Minggu, 26 Oktober 2025</div>
+    <div class="place">Kp. Lemah Duhur RT 016/004, Desa Cimande</div>
+  </div>
 
-  <section>
-    <h3>💐 Kehadiran Anda sangat kami nantikan 💐</h3>
-    <form id="guestForm">
-      <label for="nama">Nama Tamu:</label>
-      <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
+  <div class="section">
+    <h2>Rincian Acara</h2>
+    <p><strong>Akad Nikah:</strong> 10.00 WIB</p>
+    <p><strong>Resepsi:</strong> 12.00 – 15.00 WIB</p>
+    <p>Kami mohon doa restu dan kehadiran Anda.</p>
+  </div>
 
-      <label for="jumlah">Jumlah Tamu:</label>
-      <select id="jumlah" name="jumlah" required>
-        <option value="">Pilih jumlah</option>
-        <option value="1">1 orang</option>
-        <option value="2">2 orang</option>
-        <option value="3">3 orang</option>
-        <option value="4+">Lebih dari 3 orang</option>
+  <div class="section">
+    <h2>Konfirmasi Kehadiran (RSVP)</h2>
+    <form id="rsvpForm">
+      <input type="text" id="name" placeholder="Nama Anda" required>
+      <select id="status">
+        <option value="Hadir">Hadir</option>
+        <option value="Tidak Bisa">Tidak Bisa</option>
       </select>
-
-      <label for="pesan">Pesan untuk Pengantin:</label>
-      <textarea id="pesan" name="pesan" rows="4" placeholder="Tulis ucapan Anda di sini..."></textarea>
-
-      <button type="submit">Kirim Ucapan</button>
+      <textarea id="message" placeholder="Pesan untuk pengantin..."></textarea>
+      <button type="submit">Kirim</button>
     </form>
-  </section>
+    <div id="responses"></div>
+  </div>
 
-  <section>
-    <h3>📍 Lokasi Acara</h3>
-    <p>Kp. Lemah Duhur RT 016/004, Desa Cimande</p>
-    <div class="lokasi">
-      <a href="https://maps.app.goo.gl/yLhe4AgcenwJDjUf7" target="_blank">
-        Klik di sini untuk buka Google Maps
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 Adam & Ririn rahmawati Wedding | Website Undangan Digital</p>
-  </footer>
+  <div class="footer">© 2025 Ririn & Adam | Dengan cinta dari Cimande 🤍</div>
 
   <script>
-    const form = document.getElementById("guestForm");
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const nama = document.getElementById("nama").value;
-      const jumlah = document.getElementById("jumlah").value;
-      const pesan = document.getElementById("pesan").value;
+    // Efek bunga jatuh terus menerus
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), 8000);
+    }
+    setInterval(createPetal, 200);
 
-      alert(`Terima kasih ${nama}! 🎉\nJumlah tamu: ${jumlah}\nPesan Anda: ${pesan || "—"}`);
+    // Form RSVP sederhana
+    const form = document.getElementById('rsvpForm');
+    const responses = document.getElementById('responses');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const status = document.getElementById('status').value;
+      const msg = document.getElementById('message').value;
+      const div = document.createElement('div');
+      div.innerHTML = `<p><strong>${name}</strong> (${status})<br>${msg}</p><hr>`;
+      responses.prepend(div);
       form.reset();
     });
   </script>
+
 </body>
 </html>
